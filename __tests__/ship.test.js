@@ -8,7 +8,7 @@ describe ('Ship', () => {
         const ship = new Ship('Southampton')
         expect (ship.start).toEqual('Southampton');
 
-    })
+    });
 });
 
 describe('setSail', () => {
