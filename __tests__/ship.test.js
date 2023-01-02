@@ -10,3 +10,14 @@ describe ('constructor', () => {
 
     })
 });
+
+describe('setSail', () => {
+    it ('can set sail', () => {
+        const ship = new Ship('Heysham')
+
+        ship.setSail();
+
+        expect (ship.startingPort).toBeFalsy();
+    });
+
+});
