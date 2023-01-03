@@ -1,3 +1,4 @@
+const Itinerary = require('../src/itinerary');
 const Port = require('../src/port');
 const Ship = require('../src/ship');
 
@@ -27,7 +28,7 @@ describe('setSail', () => {
 });
 
 describe('dock', () => {
-    it ('can dock a ship', () => {
+    it ('can dock at a different port', () => {
         const newcastle = new Port('Newcastle');
         const ship = new Ship(newcastle);
 
