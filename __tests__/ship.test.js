@@ -7,18 +7,18 @@ describe ('Ship', () => {
         expect (new Ship()).toBeInstanceOf(Object);
     });
     it ('sets the starting port property', () => {
-        const port = new Port('Calais');
-        const ship = new Ship(port);
+        const itinerary = new Itinerary('Calais');
+        const ship = new Ship(itinerary);
 
-        expect (ship.currentPort).toEqual(port);
+        expect (ship.currentPort).toEqual(itinerary);
 
     });
 });
 
 describe('setSail', () => {
     it ('can set sail', () => {
-        const port = new Port('Barcelona');
-        const ship = new Ship(port);
+        const itinerary = new Itinerary('Barcelona');
+        const ship = new Ship(itinerary);
 
         ship.setSail();
 
@@ -29,10 +29,10 @@ describe('setSail', () => {
 
 describe('dock', () => {
     it ('can dock at a different port', () => {
-        const newcastle = new Port('Newcastle');
+        const newcastle = new Itinerary('Newcastle');
         const ship = new Ship(newcastle);
 
-        const amsterdam = new Port('Amsterdam');
+        const amsterdam = new Itinerary ('Amsterdam');
         ship.dock(amsterdam);
 
         expect (ship.currentPort).toBe(amsterdam);
