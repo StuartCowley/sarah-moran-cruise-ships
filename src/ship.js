@@ -6,9 +6,12 @@ class Ship {
     }
 
     setSail(){
-        //if(this.currentPort === (array.length -1)){
-            //throw new Error('You have reached the end of your itinerary, please disembark')
-        //}
+        const itinerary = this.itinerary;
+        const currentPortIndex = itinerary.ports.indexOf(this.currentPort);
+
+        if(currentPortIndex === (itinerary.ports.length -1)){
+            throw new Error('You have reached the end of your itinerary, please disembark')
+        }
         this.previousPort = this.currentPort;
         this.currentPort = null;
     }

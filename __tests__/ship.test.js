@@ -21,7 +21,18 @@ describe ('Ship', () => {
 });
 
 describe('setSail', () => {
-    it ('throws an error if you try to sail further than the last port in the itinerary', () => {
+    it ('can set sail from a starting port', () => {
+        const barca = new Port ('Barcelona');
+        const ibiza = new Port ('Ibiza');
+        const itinerary = new Itinerary([barca,ibiza]);
+        const ship = new Ship(itinerary);
+
+        ship.setSail();
+
+        expect (ship.currentPort).toBeFalsy();
+        //expect (ship.previousPort).toBe(itinerary);
+    });
+    it ('throws an error if you try to sail past the last port in the itinerary', () => {
         const newcastle = new Port ('Newcastle');
         const amsterdam = new Port ('Amsterdam');
         const itinerary = new Itinerary ([newcastle, amsterdam]);
@@ -29,19 +40,8 @@ describe('setSail', () => {
 
         ship.setSail();
         ship.dock();
-        ship.setSail();
 
-        expect(() => ship.setSail().toThrow('You have reached the end of your itinerary, please disembark'));
-    });
-    it ('can set sail from a starting port', () => {
-        const port = new Port ('Barcelona')
-        const itinerary = new Itinerary([port]);
-        const ship = new Ship(itinerary);
-
-        ship.setSail();
-
-        expect (ship.currentPort).toBeFalsy();
-        //expect (ship.previousPort).toBe(itinerary);
+        expect(() => ship.setSail()).toThrowError('You have reached the end of your itinerary, please disembark');
     });
 
 });
