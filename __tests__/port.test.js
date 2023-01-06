@@ -11,3 +11,30 @@ describe('Port', () => {
         expect (port.name).toBe('Dover');
     });
 });
+
+describe('addShip', () => {
+    it ('adds the docking ship to the ships in the port', () => {
+        const barca = new Port ('Barcelona');
+        const ship = {};
+
+        
+        barca.addShip(ship);
+
+        expect(barca.ships).toEqual([ship]);
+
+    });
+
+});
+
+describe('removeShip', () => {
+    it ('removes a ship leaving the port', () => {
+
+    
+    const mallorca = new Port ('Mallorca');
+    const ship = 'string';
+
+    mallorca.removeShip(ship);
+
+    expect(mallorca.ships).toEqual([]);
+});
+}); 
