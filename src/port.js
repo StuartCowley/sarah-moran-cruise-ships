@@ -11,7 +11,6 @@ class Port {
 
     removeShip(shipName){
         const shipNameIndex = this.ships.indexOf(shipName)
-        //delete this.ships[shipNameIndex];
         this.ships.splice(shipNameIndex,1);
     }
 }

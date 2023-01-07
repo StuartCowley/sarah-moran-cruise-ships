@@ -15,7 +15,9 @@ class Ship {
             throw new Error('You have reached the end of your itinerary, please disembark')
         }
         this.previousPort = this.currentPort;
+        this.currentPort.removeShip(this);
         this.currentPort = null;
+        
     }
 
     dock(){
@@ -23,6 +25,7 @@ class Ship {
         const previousPortIndex = itinerary.ports.indexOf(this.previousPort);
 
         this.currentPort = itinerary.ports[previousPortIndex + 1];
+        this.currentPort.addShip(this);
     }
 
 }

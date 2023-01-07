@@ -37,6 +37,7 @@ describe('setSail', () => {
 
         ship.setSail();
 
+        //expect (ship.currentPort.ships).not.toEqual();
         expect (ship.currentPort).toBeFalsy();
         //expect (ship.previousPort).toBe(itinerary);
     });
@@ -51,7 +52,6 @@ describe('setSail', () => {
 
         expect(() => ship.setSail()).toThrowError('You have reached the end of your itinerary, please disembark');
     });
-
 });
 
 describe('dock', () => {
@@ -65,6 +65,18 @@ describe('dock', () => {
         ship.dock();
 
         expect (ship.currentPort).toBe(amsterdam);
+
+    });
+    it('contains the Ship instance in the current port', () => {
+        const miraflores = new Port ('Miraflores');
+        const huanchaco = new Port('Huanchaco');
+        const itinerary = new Itinerary([miraflores, huanchaco]);
+        const ship = new Ship(itinerary);
+
+        ship.setSail();
+        ship.dock();
+
+        expect(ship.currentPort.ships).toEqual([ship]);
 
     });
 });
