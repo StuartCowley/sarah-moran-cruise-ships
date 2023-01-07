@@ -2,42 +2,42 @@ const Port = require('../src/port');
 const Itinerary = require('../src/itinerary');
 const Ship = require('../src/ship');
 
+
 describe('Port', () => {
+    describe('with adding and removing ships', () => {
+        let port;
+        let mayflower;
+        let titanic;
+    
+    beforeEach(() => {
+        port = new Port ('Mallorca');
+        mayflower = {};
+        titanic = {};
+    });
+
     it ('can be instantiated', () => {
         expect (new Port()).toBeInstanceOf(Object);
     });
+
     it ('sets the name property of the port', () => {
-        const port = new Port ('Dover')
-        expect (port.name).toBe('Dover');
+        expect (port.name).toBe('Mallorca');
     });
-});
 
-describe('addShip', () => {
     it ('adds the docking ship to the ships in the port', () => {
-        const barca = new Port ('Barcelona');
-        const ship = {};
-
         
-        barca.addShip(ship);
+        port.addShip(mayflower);
 
-        expect(barca.ships).toContain(ship);
+        expect(port.ships).toContain(mayflower);
 
     });
 
-});
-
-describe('removeShip', () => {
     it ('removes a ship leaving the port', () => {
 
+        port.addShip(mayflower);
+        port.addShip(titanic);
+        port.removeShip(titanic);
     
-    const mallorca = new Port ('Mallorca');
-    const mayflower = {};
-    const titanic = {};
-
-    mallorca.addShip(mayflower);
-    mallorca.addShip(titanic);
-    mallorca.removeShip(titanic);
-
-    expect(mallorca.ships).toEqual([mayflower]);
+        expect(port.ships).toEqual([mayflower]);
+    });
+    });
 });
-}); 
