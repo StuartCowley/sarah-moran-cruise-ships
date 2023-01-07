@@ -18,6 +18,14 @@ describe ('Ship', () => {
         expect (ship.currentPort).toBe(port);
 
     });
+    it ('gets added to port on instantiation', () => {
+        const port = new Port ('Dublin');
+        const itinerary = new Itinerary([port]);
+        const ship = new Ship(itinerary);
+
+        expect(ship.currentPort.ships).toEqual([ship]);
+
+    });
 });
 
 describe('setSail', () => {
