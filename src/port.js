@@ -1,8 +1,8 @@
 
 class Port {
-    constructor(name){
+    constructor(name, ships=[]){
         this.name = name;
-        this.ships = []
+        this.ships = ships
     }
 
     addShip(shipName){
@@ -10,7 +10,9 @@ class Port {
     }
 
     removeShip(shipName){
-        delete this.ships[shipName];
+        const shipNameIndex = this.ships.indexOf(shipName)
+        //delete this.ships[shipNameIndex];
+        this.ships.splice(shipNameIndex,1);
     }
 }
 
