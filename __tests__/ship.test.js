@@ -3,45 +3,44 @@ const Port = require('../src/port');
 const Ship = require('../src/ship');
 
 describe ('Ship', () => {
-    it ('returns an object', () => {
-        const port = new Port('Dublin');
-        const itinerary = new Itinerary([port]);
-        const ship = new Ship(itinerary);
+    describe('with ports and an itinerary', () => {
+        let ship;
+        let newcastle;
+        let amsterdam;
+        let itinerary;
+        
+    beforeEach(() => {
+        newcastle = new Port ('Newcastle');
+        amsterdam = new Port ('Amsterdam');
+        itinerary = new Itinerary ([newcastle, amsterdam]);
+        ship = new Ship(itinerary);
 
-        expect (ship).toBeInstanceOf(Object);
-    });
-    it ('sets the starting port property', () => {
-        const port = new Port ('Amsterdam');
-        const itinerary = new Itinerary([port]);
-        const ship = new Ship(itinerary);
+        });
+        it ('returns an object', () => {
+            expect (ship).toBeInstanceOf(Object);
+        });
 
-        expect (ship.currentPort).toBe(port);
+        it ('sets the starting port property', () => {
+            expect (ship.currentPort).toBe(newcastle);
+        });
 
-    });
-    it ('gets added to port on instantiation', () => {
-        const port = new Port ('Dublin');
-        const itinerary = new Itinerary([port]);
-        const ship = new Ship(itinerary);
+        it ('gets added to port on instantiation', () => {
+            expect(ship.currentPort.ships).toContain(ship);
+        });
 
-        expect(ship.currentPort.ships).toContain(ship);
-
+        it ('can set sail from a starting port', () => {
+  
+            ship.setSail();
+    
+            expect (ship.currentPort).toBeFalsy();
+            expect (newcastle.ships).not.toContain(ship);
+            //expect (ship.previousPort).toBe(itinerary);
+        });
     });
 });
 
 describe('setSail', () => {
-    it ('can set sail from a starting port', () => {
-        const barca = new Port ('Barcelona');
-        const ibiza = new Port ('Ibiza');
-        const itinerary = new Itinerary([barca,ibiza]);
-        const ship = new Ship(itinerary);
-
-        ship.setSail();
-
-        
-        expect (ship.currentPort).toBeFalsy();
-        expect (barca.ships).not.toContain(ship);
-        //expect (ship.previousPort).toBe(itinerary);
-    });
+  
     it ('throws an error if you try to sail past the last port in the itinerary', () => {
         const newcastle = new Port ('Newcastle');
         const amsterdam = new Port ('Amsterdam');
