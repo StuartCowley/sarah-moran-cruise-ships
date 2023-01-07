@@ -20,7 +20,7 @@ describe('addShip', () => {
         
         barca.addShip(ship);
 
-        expect(barca.ships).toEqual([ship]);
+        expect(barca.ships).toContain(ship);
 
     });
 
@@ -31,10 +31,13 @@ describe('removeShip', () => {
 
     
     const mallorca = new Port ('Mallorca');
-    const ship = 'string';
+    const mayflower = {};
+    const titanic = {};
 
-    mallorca.removeShip(ship);
+    mallorca.addShip(mayflower);
+    mallorca.addShip(titanic);
+    mallorca.removeShip(titanic);
 
-    expect(mallorca.ships).toEqual([]);
+    expect(mallorca.ships).toEqual([mayflower]);
 });
 }); 

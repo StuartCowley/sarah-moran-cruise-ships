@@ -23,7 +23,7 @@ describe ('Ship', () => {
         const itinerary = new Itinerary([port]);
         const ship = new Ship(itinerary);
 
-        expect(ship.currentPort.ships).toEqual([ship]);
+        expect(ship.currentPort.ships).toContain(ship);
 
     });
 });
@@ -37,8 +37,9 @@ describe('setSail', () => {
 
         ship.setSail();
 
-        //expect (ship.currentPort.ships).not.toEqual();
+        
         expect (ship.currentPort).toBeFalsy();
+        expect (barca.ships).not.toContain(ship);
         //expect (ship.previousPort).toBe(itinerary);
     });
     it ('throws an error if you try to sail past the last port in the itinerary', () => {
@@ -65,6 +66,7 @@ describe('dock', () => {
         ship.dock();
 
         expect (ship.currentPort).toBe(amsterdam);
+        expect(ship.currentPort.ships).toContain(ship);
 
     });
     it('contains the Ship instance in the current port', () => {
@@ -76,7 +78,7 @@ describe('dock', () => {
         ship.setSail();
         ship.dock();
 
-        expect(ship.currentPort.ships).toEqual([ship]);
+        expect(ship.currentPort.ships).toContain(ship);
 
     });
 });
