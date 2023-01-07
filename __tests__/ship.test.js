@@ -69,17 +69,5 @@ describe('dock', () => {
         expect(ship.currentPort.ships).toContain(ship);
 
     });
-    it('contains the Ship instance in the current port', () => {
-        const miraflores = new Port ('Miraflores');
-        const huanchaco = new Port('Huanchaco');
-        const itinerary = new Itinerary([miraflores, huanchaco]);
-        const ship = new Ship(itinerary);
-
-        ship.setSail();
-        ship.dock();
-
-        expect(ship.currentPort.ships).toContain(ship);
-
-    });
 });
 
