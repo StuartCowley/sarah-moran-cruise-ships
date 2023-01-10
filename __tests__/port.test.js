@@ -11,8 +11,8 @@ describe('Port', () => {
     
     beforeEach(() => {
         port = new Port ('Mallorca');
-        mayflower = {};
-        titanic = {};
+        mayflower = jest.fn();
+        titanic = jest.fn();
     });
 
     it ('can be instantiated', () => {
