@@ -1,5 +1,5 @@
 const Itinerary = require('../src/itinerary');
-const Port = require('../src/port');
+//const Port = require('../src/port');
 const Ship = require('../src/ship');
 
 describe ('Ship', () => {
@@ -10,8 +10,19 @@ describe ('Ship', () => {
         let itinerary;
         
     beforeEach(() => {
-        newcastle = new Port ('Newcastle');
-        amsterdam = new Port ('Amsterdam');
+        newcastle = {
+            addShip: jest.fn(),
+            removeShip: jest.fn(),
+            name: "Newcastle",
+            ships: []
+        }
+        
+        amsterdam = {
+            addShip: jest.fn(),
+            removeShip: jest.fn(),
+            name: "Amsterdam",
+            ships: []
+        }
         itinerary = new Itinerary ([newcastle, amsterdam]);
         ship = new Ship(itinerary);
 
@@ -25,7 +36,7 @@ describe ('Ship', () => {
         });
 
         it ('gets added to port on instantiation', () => {
-            expect(ship.currentPort.ships).toContain(ship);
+            expect(newcastle.addShip).toHaveBeenCalledWith(ship);
         });
 
         it ('can set sail from a starting port', () => {
@@ -33,40 +44,28 @@ describe ('Ship', () => {
             ship.setSail();
     
             expect (ship.currentPort).toBeFalsy();
-            expect (newcastle.ships).not.toContain(ship);
+            expect (newcastle.removeShip).toHaveBeenCalledWith(ship);
             //expect (ship.previousPort).toBe(itinerary);
+        });
+
+        it ('throws an error if you try to sail past the last port in the itinerary', () => {
+    
+            ship.setSail();
+            ship.dock();
+    
+            expect(() => ship.setSail()).toThrowError('You have reached the end of your itinerary, please disembark');
+        });
+
+        it ('can dock at a different port', () => {
+    
+            ship.setSail();
+            ship.dock();
+    
+            expect (ship.currentPort).toBe(amsterdam);
+            expect(amsterdam.addShip).toHaveBeenCalledWith(ship);
+
         });
     });
 });
 
-describe('setSail', () => {
-  
-    it ('throws an error if you try to sail past the last port in the itinerary', () => {
-        const newcastle = new Port ('Newcastle');
-        const amsterdam = new Port ('Amsterdam');
-        const itinerary = new Itinerary ([newcastle, amsterdam]);
-        const ship = new Ship(itinerary);
-
-        ship.setSail();
-        ship.dock();
-
-        expect(() => ship.setSail()).toThrowError('You have reached the end of your itinerary, please disembark');
-    });
-});
-
-describe('dock', () => {
-    it ('can dock at a different port', () => {
-        const newcastle = new Port ('Newcastle');
-        const amsterdam = new Port ('Amsterdam');
-        const itinerary = new Itinerary ([newcastle, amsterdam]);
-        const ship = new Ship(itinerary);
-
-        ship.setSail();
-        ship.dock();
-
-        expect (ship.currentPort).toBe(amsterdam);
-        expect(ship.currentPort.ships).toContain(ship);
-
-    });
-});
 
