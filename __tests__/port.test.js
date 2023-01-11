@@ -1,7 +1,4 @@
 const Port = require('../src/port');
-const Itinerary = require('../src/itinerary');
-const Ship = require('../src/ship');
-
 
 describe('Port', () => {
     describe('with adding and removing ships', () => {
