@@ -1,40 +1,37 @@
-const Port = require('../src/port');
+const Port = require("../src/port");
 
-describe('Port', () => {
-    describe('with adding and removing ships', () => {
-        let port;
-        let mayflower;
-        let titanic;
-    
+describe("Port", () => {
+  describe("with adding and removing ships", () => {
+    let port;
+    let mayflower;
+    let titanic;
+
     beforeEach(() => {
-        port = new Port ('Mallorca');
-        mayflower = jest.fn();
-        titanic = jest.fn();
+      port = new Port("Mallorca");
+      mayflower = jest.fn();
+      titanic = jest.fn();
     });
 
-    it ('can be instantiated', () => {
-        expect (new Port()).toBeInstanceOf(Object);
+    it("can be instantiated", () => {
+      expect(new Port()).toBeInstanceOf(Object);
     });
 
-    it ('sets the name property of the port', () => {
-        expect (port.name).toBe('Mallorca');
+    it("sets the name property of the port", () => {
+      expect(port.name).toBe("Mallorca");
     });
 
-    it ('adds the docking ship to the ships in the port', () => {
-        
-        port.addShip(mayflower);
+    it("adds the docking ship to the ships in the port", () => {
+      port.addShip(mayflower);
 
-        expect(port.ships).toContain(mayflower);
-
+      expect(port.ships).toContain(mayflower);
     });
 
-    it ('removes a ship leaving the port', () => {
+    it("removes a ship leaving the port", () => {
+      port.addShip(mayflower);
+      port.addShip(titanic);
+      port.removeShip(titanic);
 
-        port.addShip(mayflower);
-        port.addShip(titanic);
-        port.removeShip(titanic);
-    
-        expect(port.ships).toEqual([mayflower]);
+      expect(port.ships).toEqual([mayflower]);
     });
-    });
+  });
 });
