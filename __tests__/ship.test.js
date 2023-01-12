@@ -1,5 +1,3 @@
-const Itinerary = require('../src/itinerary');
-//const Port = require('../src/port');
 const Ship = require('../src/ship');
 
 describe ('Ship', () => {
@@ -23,7 +21,13 @@ describe ('Ship', () => {
             name: "Amsterdam",
             ships: []
         }
-        itinerary = new Itinerary ([newcastle, amsterdam]);
+
+        itinerary = {
+            ports: [newcastle,amsterdam]
+        }
+        
+        //itinerary = new Itinerary ([newcastle, amsterdam]);
+
         ship = new Ship(itinerary);
 
         });
